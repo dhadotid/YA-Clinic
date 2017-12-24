@@ -1,0 +1,75 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="YA_Clinic.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YA Clinic</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet"/>
+    <link href="Content/Style.css" rel="stylesheet" />
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+
+</head>
+<body>
+
+    <form id="masterform" runat="server">
+        <header>
+            <input type="checkbox" id="tag-menu"/>
+            <label class="menu-bar" for="tag-menu">YA Clinic</label>
+            <div class="jw-drawer">
+                <nav>
+                    <ul>
+                        <li><a href="Dashboard.aspx">Dashboard</a></li>
+                        <li><a href="Specialist.aspx">Specialist</a></li>
+                        <li><a href="Doctor.aspx">Doctor</a></li>
+                        <li><a href="Patient.aspx">Patient</a></li>
+                        <li><a href="Treatment.aspx">Treatment</a></li>
+                        <li><a href="Recipe.aspx">Recipe</a></li>
+                        <!--
+                        <li class="dropdown">
+                            <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Recipe<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-color">
+                                <li><a href="#">Recipe Detail</a></li>
+                            </ul>
+                        </li>
+                        !-->
+                        <li><a href="Drug.aspx">Drug</a></li>
+                        <li><a href="Payment.aspx">Payment</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <ul class="menu-bar" style="float: right;">
+                <li class="dropdown no-bullets" style="margin-right: 40px;">
+                    <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, Account<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-color">
+                        <li><a href="#">Change Password</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+
+        
+        <div class="content">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder></div>
+    </form>
+
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.table').DataTable();
+      });
+    </script>
+</body>
+</html>
