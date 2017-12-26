@@ -19,6 +19,27 @@ namespace YA_Clinic
         {
             idpatient.Value = controller.AutoGenerateID();
             txtname.Focus();
+
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
+        }
+
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

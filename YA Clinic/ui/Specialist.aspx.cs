@@ -19,6 +19,26 @@ namespace YA_Clinic
             {
                 SpecialistData();
             }
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
+        }
+
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    btnAddnNew.Visible = false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         protected void SpecialistData()
@@ -42,6 +62,11 @@ namespace YA_Clinic
             SpecialistData();
             gv_Specialist.PageIndex = e.NewPageIndex;
             gv_Specialist.DataBind();
+        }
+
+        protected void btnAddnNew_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ui/AddSpecialist.aspx");
         }
     }
 }

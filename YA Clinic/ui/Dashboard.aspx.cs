@@ -11,7 +11,22 @@ namespace YA_Clinic
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
+        }
 
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

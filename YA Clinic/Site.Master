@@ -48,11 +48,14 @@
                 </nav>
             </div>
             <ul class="menu-bar" style="float: right;">
+                <!--<asp:Label CssClass="dropdown-toggle" runat="server" ID="tvNama"></asp:Label>-->
                 <li class="dropdown no-bullets" style="margin-right: 40px;">
-                    <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, Account<span class="caret"></span></a>
+                    <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" id="tvNama2">Hi, Account<span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-color">
                         <li><a href="#">Change Password</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li>
+                            <asp:LinkButton runat="server" Text="Logout" ID="btnLogout" OnClick="btnLogout_Click"></asp:LinkButton>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -64,8 +67,8 @@
             </asp:ContentPlaceHolder></div>
     </form>
 
-    <script src="Scripts/jquery-3.1.1.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         $('.table').DataTable();

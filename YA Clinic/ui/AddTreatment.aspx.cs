@@ -12,7 +12,7 @@ namespace YA_Clinic.ui
     {
         string idPatient;
         string idDoctor;
-        string date = DateTime.Now.ToString("dd/MM/yyyy");
+        string date = DateTime.Now.ToString("yyyy-MM-dd");
         TreatmentController controller = new TreatmentController();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,6 +24,27 @@ namespace YA_Clinic.ui
             {
                 doctorData();
                 patientData();
+            }
+
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
+        }
+
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    //Response.Redirect("~/ui/Dashboard.aspx");
+                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

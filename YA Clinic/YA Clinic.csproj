@@ -200,6 +200,17 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\img\backgrounds\1%402x.jpg" />
+    <Content Include="Content\img\backgrounds\1.jpg" />
+    <Content Include="Content\img\backgrounds\2%402x.jpg" />
+    <Content Include="Content\img\backgrounds\2.jpg" />
+    <Content Include="Content\img\backgrounds\3%402x.jpg" />
+    <Content Include="Content\img\backgrounds\3.jpg" />
+    <Content Include="Content\style2.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\jquery.backstretch.js" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -211,14 +222,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Style.css" />
+    <Content Include="ui\AddDrug.aspx" />
+    <Content Include="ui\AddRecipe.aspx" />
+    <Content Include="ui\Login.aspx" />
     <Content Include="ui\AddSpecialist.aspx" />
     <Content Include="ui\AddTreatment.aspx" />
     <Content Include="ui\Dashboard.aspx" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -227,12 +236,20 @@
     <Content Include="ui\Drug.aspx" />
     <Content Include="ui\Patient.aspx" />
     <Content Include="ui\PatientDetail.aspx" />
+    <Content Include="ui\Payment.aspx" />
     <Content Include="ui\Recipe.aspx" />
     <Content Include="ui\Specialist.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -400,6 +417,28 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ui\AddDrug.aspx.cs">
+      <DependentUpon>AddDrug.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\AddDrug.aspx.designer.cs">
+      <DependentUpon>AddDrug.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ui\AddRecipe.aspx.cs">
+      <DependentUpon>AddRecipe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\AddRecipe.aspx.designer.cs">
+      <DependentUpon>AddRecipe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ui\Controller\LoginController.cs" />
+    <Compile Include="ui\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ui\AddTreatment.aspx.cs">
       <DependentUpon>AddTreatment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -418,6 +457,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="ui\Controller\DoctorController.cs" />
+    <Compile Include="ui\Controller\PaymentController.cs" />
     <Compile Include="ui\Controller\RecipeController.cs" />
     <Compile Include="ui\Controller\SpecialistController.cs" />
     <Compile Include="ui\AddSpecialist.aspx.cs">
@@ -475,6 +515,13 @@
       <DependentUpon>PatientDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ui\Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ui\Recipe.aspx.cs">
       <DependentUpon>Recipe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

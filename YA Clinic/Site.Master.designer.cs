@@ -22,6 +22,33 @@ namespace YA_Clinic {
         protected global::System.Web.UI.HtmlControls.HtmlForm masterform;
         
         /// <summary>
+        /// tvNama control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label tvNama;
+        
+        /// <summary>
+        /// tvNama2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tvNama2;
+        
+        /// <summary>
+        /// btnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLogout;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>

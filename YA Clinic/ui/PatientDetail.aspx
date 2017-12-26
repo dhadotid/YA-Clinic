@@ -10,7 +10,7 @@
                 <br>
 
                 <center>
-                <h2 id="tulisanatas">Add New Patient</h2>
+                <h2 id="tulisanatas">Add New Data Patient</h2>
                 </center>
                 <hr>
 

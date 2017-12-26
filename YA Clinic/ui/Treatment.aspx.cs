@@ -19,8 +19,28 @@ namespace YA_Clinic.ui
             {
                 treatmentData();
             }
+
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
         }
 
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void treatmentData()
         {
             dgv_Treatment.DataSource = tc.treatmentData();

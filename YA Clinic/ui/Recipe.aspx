@@ -4,7 +4,7 @@
 
     <div class="row">
           <div class="col-md-12">
-            <h2 class="text-center" id="tulisanatas">Recipe</h2>
+            <h2 class="text-center" id="tulisanatas">Data Recipe</h2>
             <hr style="margin-right: 10px; width: 1382px;">
             <!-- <div class="row">
               <div class="col-sm-4 col-sm-offset-4">
@@ -14,7 +14,7 @@
                       <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
-                    <a href="#" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Recipe</a>
+                    <a href="AddRecipe.aspx" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Data Recipe</a>
               </fieldset>
             <div id="page-content-wrapper">
               <div class="container-fluid">

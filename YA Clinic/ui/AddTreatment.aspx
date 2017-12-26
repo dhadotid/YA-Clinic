@@ -9,7 +9,7 @@
                 <br>
                 
                 <center>
-                <h2 id="tulisanatas">Add New Treatment</h2>
+                <h2 id="tulisanatas">Add New Data Treatment</h2>
                 </center>
                 <hr>
 

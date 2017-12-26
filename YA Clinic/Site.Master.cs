@@ -69,12 +69,28 @@ namespace YA_Clinic
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            setName();
         }
 
+        private void setName()
+        {
+            //Label myLabel = this.FindControl("tvNama") as Label;
+            if (Session["nama"] != null)
+            {
+                //myLabel.Text = "Hi, " + Session["nama"].ToString();
+                tvNama2.InnerText = "Hi, " + Session["nama"].ToString();
+            }
+        }
+        
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            Response.Redirect("~/ui/Login.aspx");
         }
     }
 

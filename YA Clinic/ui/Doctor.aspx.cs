@@ -19,6 +19,26 @@ namespace YA_Clinic.form
             {
                 doctorData();
             }
+            if (!isLogin())
+            {
+                Response.Redirect("~/ui/Login.aspx");
+            }
+        }
+
+        private bool isLogin()
+        {
+            if (Session["nama"] != null)
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    btnAddnNew.Visible = false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void doctorData()

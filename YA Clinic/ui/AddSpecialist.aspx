@@ -10,7 +10,7 @@
                 <br>
 
                 <center>
-                <h2 id="tulisanatas">Add New Specialist</h2>
+                <h2 id="tulisanatas">Add New Data Specialist</h2>
                 </center>
                 <hr>
 

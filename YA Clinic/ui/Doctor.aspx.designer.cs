@@ -31,6 +31,24 @@ namespace YA_Clinic.form {
         protected global::System.Web.UI.WebControls.Button btnSearch;
         
         /// <summary>
+        /// btnAddnNew control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddnNew;
+        
+        /// <summary>
+        /// btnaddnewdata control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnaddnewdata;
+        
+        /// <summary>
         /// dgv_Doctor control.
         /// </summary>
         /// <remarks>
