@@ -19,10 +19,10 @@
             </div>  !--->
               <fieldset>
                   <div class="col-sm-2">
-                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control" AutoPostBack="True" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
-                    <a href="PatientDetail.aspx" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Data Patient</a>
+                  <asp:Button CssClass="btn btn-info" style="float: right; margin-right: 20px; margin-bottom: 10px;" ID="btnAddnNew" runat="server" Text="Add New Data Patient" OnClick="btnAddnNew_Click" />
               </fieldset>
               
 
@@ -30,7 +30,7 @@
               <div class="container-fluid">
                 <div class="row" style="margin-right:5px;">
                   
-                    <asp:GridView ID="dgv_Patient" DataKeyNames="Id_Patient" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" OnPageIndexChanging="dgv_Patient_PageIndexChanging" PageSize="5" OnRowDeleting="dgv_Patient_RowDeleting">
+                    <asp:GridView ID="dgv_Patient" DataKeyNames="Id_Patient" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" OnPageIndexChanging="dgv_Patient_PageIndexChanging" PageSize="5" OnRowDeleting="dgv_Patient_RowDeleting" OnRowCommand="dgv_Patient_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="Id Patient">
                 <ItemTemplate>
@@ -67,7 +67,7 @@
 
         <HeaderStyle HorizontalAlign="Center"/>
         <RowStyle HorizontalAlign="Center" />
-        <PagerStyle HorizontalAlign="Center"/>
+        <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
 
     </asp:GridView>
 

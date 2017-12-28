@@ -49,7 +49,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtDiagnose">Diagnose</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtDiagnose" runat="server" placeholder="Diagnose" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtDiagnose" runat="server" placeholder="Diagnose" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                   </div>
                 </div>
 
@@ -77,7 +77,8 @@
                 <br />
                 <asp:Label ID="lblPatientData" runat="server" Text="Data Patient" style="font-weight: 700"></asp:Label>
                 <br />
-                <asp:TextBox ID="txtSearchPatient" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Patient" Width="472px"></asp:TextBox>
+
+                <asp:TextBox ID="txtSearchPatient" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Patient" Width="472px" OnTextChanged="txtSearchPatient_TextChanged" AutoPostBack="true"></asp:TextBox>
                 <br />
                 <!--<asp:Button ID="btnSearchPatient" runat="server" Text="Search" CssClass="btn btn-info"/>!-->
             <asp:GridView ID="dgv_Patient" DataKeyNames="Id_Patient" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Patient_PageIndexChanging" OnRowCommand="dgv_Patient_RowCommand">
@@ -98,6 +99,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
                 </Columns>
+                <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
             </asp:GridView>
 
             </div>
@@ -105,7 +107,7 @@
                 <br />
                 <asp:Label ID="lblDoctorData" runat="server" Text="Data Doctor" style="font-weight: 700"></asp:Label>
                 <br />
-                <asp:TextBox ID="txtSearchDoctor" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Doctor" Width="472px"></asp:TextBox>
+                <asp:TextBox ID="txtSearchDoctor" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Doctor" Width="472px" AutoPostBack="true" OnTextChanged="txtSearchDoctor_TextChanged"></asp:TextBox>
                 <br />
             <asp:GridView ID="dgv_Doctor" DataKeyNames="Id_Doctor" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Doctor_PageIndexChanging" OnSelectedIndexChanged="dgv_Doctor_SelectedIndexChanged">
                 <Columns>
@@ -126,7 +128,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Fare">
                     <ItemTemplate>
-                        <asp:Label ID="lblFare" runat="server" Text='<%#Eval("Fare") %>'/>
+                        <asp:Label ID="lblFare" runat="server" Text='<%#Eval("Fare", "{0:C2}") %>'/>
                     </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="">
@@ -135,6 +137,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
                 </Columns>
+                <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
             </asp:GridView>
             </div>
         </div>

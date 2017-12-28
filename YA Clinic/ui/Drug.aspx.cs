@@ -58,5 +58,18 @@ namespace YA_Clinic.ui
         {
             Response.Redirect("~/ui/AddDrug.aspx");
         }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                dgv_Drug.DataSource = controller.searchDrugData(txtSearch.Text);
+                dgv_Drug.DataBind();
+            }
+            else
+            {
+                onRequestData();
+            }
+        }
     }
 }

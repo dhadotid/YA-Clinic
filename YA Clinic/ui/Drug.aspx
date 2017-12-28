@@ -11,7 +11,7 @@
                 </div> -->
               <fieldset>
                   <div class="col-sm-2">
-                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control" AutoPostBack="True" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
                   <asp:Button CssClass="btn btn-info" style="float: right; margin-right: 20px; margin-bottom: 10px;" ID="btnAddnNew" runat="server" Text="Add New Data Drug" OnClick="btnAddnNew_Click" />
@@ -50,14 +50,14 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Price">
                 <ItemTemplate>
-                    <asp:Label ID="lblPrice" runat="server" Text='<%#Eval("Price") %>'/>
+                    <asp:Label ID="lblPrice" runat="server" Text='<%#Eval("Price", "{0:C2}") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
 
         <HeaderStyle HorizontalAlign="Center"/>
         <RowStyle HorizontalAlign="Center" />
-        <PagerStyle HorizontalAlign="Center"/>
+        <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
 
     </asp:GridView>
 

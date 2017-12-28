@@ -11,10 +11,10 @@
                 </div> -->
               <fieldset>
                   <div class="col-sm-2">
-                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control" AutoPostBack="True" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
-                    <a href="#" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Data Payment</a>
+                    <a href="AddPayment.aspx" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Data Payment</a>
               </fieldset>
             <div id="page-content-wrapper">
               <div class="container-fluid">
@@ -49,24 +49,24 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Payment Doctor">
                 <ItemTemplate>
-                    <asp:Label ID="lblPaymentDoctor" runat="server" Text='<%#Eval("PaymentDoctor") %>'/>
+                    <asp:Label ID="lblPaymentDoctor" runat="server" Text='<%#Eval("PaymentDoctor", "{0:C2}") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Payment Drug">
                 <ItemTemplate>
-                    <asp:Label ID="lblPaymentDrug" runat="server" Text='<%#Eval("PaymentDrug") %>'/>
+                    <asp:Label ID="lblPaymentDrug" runat="server" Text='<%#Eval("PaymentDrug", "{0:C2}") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Total Payment">
                 <ItemTemplate>
-                    <asp:Label ID="lblTotalPayment" runat="server" Text='<%#Eval("TotalPayment") %>'/>
+                    <asp:Label ID="lblTotalPayment" runat="server" Text='<%#Eval("TotalPayment", "{0:C2}") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
 
         <HeaderStyle HorizontalAlign="Center"/>
         <RowStyle HorizontalAlign="Center" />
-        <PagerStyle HorizontalAlign="Center"/>
+        <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
 
     </asp:GridView>
                 </div>

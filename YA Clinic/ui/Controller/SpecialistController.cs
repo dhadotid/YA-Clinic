@@ -119,6 +119,26 @@ namespace YA_Clinic.Controller
             }
         }
 
+        public DataSet searchSpecialistData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select * from Doctor.Specialist where Id_Specialist like '%" + search + "%' or Specialist like '%" + search + "%' or Fare like '%" + search + "%'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+                return ds;
+            }
+        }
+
         public bool deleteData(string idSpecialist)
         {
             sqlCon = con.openConnection();

@@ -51,5 +51,18 @@ namespace YA_Clinic.ui
             dgv_Payment.PageIndex = e.NewPageIndex;
             dgv_Payment.DataBind();
         }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                dgv_Payment.DataSource = controller.searchPaymentData(txtSearch.Text);
+                dgv_Payment.DataBind();
+            }
+            else
+            {
+                onRequestData();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,6 +13,9 @@ namespace YA_Clinic.ui
 {
     public partial class AddRecipe : System.Web.UI.Page
     {
+        string drugQty = "", expdate, harga;
+        string date = DateTime.Now.ToString("dd/MM/yyyy");
+        DataTable dt = new DataTable();
         RecipeController controller = new RecipeController();
         DrugController dc = new DrugController();
         Connection con = new Connection();
@@ -98,31 +102,125 @@ namespace YA_Clinic.ui
             if (rows != null)
             {
                 txtIdDrug.Text = (rows.FindControl("lblIdDrug") as Label).Text;
+                drugQty = (rows.FindControl("lblStockDrug") as Label).Text;
+                expdate = (rows.FindControl("lblExpDate") as Label).Text;
+                harga = (rows.FindControl("lblPrice") as Label).Text;
+                if (Convert.ToInt32(drugQty) > 1 && Convert.ToInt32(drugQty) < 20)
+                {
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('The remaining drug '" + drugQty +"')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('The remaining drug " + drugQty +"')", true);
+                }
+                else if(Convert.ToInt32(drugQty) > 0 && Convert.ToInt32(drugQty) < 2)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('drug stocks have been exhausted')", true);
+                    txtIdDrug.Text = "";
+                }
+                dataDrug();
                 dataRecipeDrug();
             }
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            controller.draftData(txtIdRecipe.Text, txtIdDrug.Text, txtQty.Text, txtDose.Text);
-            dataRecipeDrug();
-            txtSearchDrugRecipe.Visible = true;
-            lblDataRecipe.Visible = true;
+            dt = controller.getSpesificValueDrug(txtIdDrug.Text);
+            drugQty = dt.Rows[0][3].ToString();
+            if (valid())
+            {
+                if(Convert.ToInt32(drugQty) < Convert.ToInt32(txtQty.Text)){
+                    txtQty.Focus();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('less drug')", true);
+                }
+                else
+                {
+                    controller.draftData(txtIdRecipe.Text, txtIdDrug.Text, txtQty.Text, txtDose.Text);
+                    dataRecipeDrug();
+                    txtSearchDrugRecipe.Visible = true;
+                    lblDataRecipe.Visible = true;
+                }
+            }
         }
 
         protected void gv_RecipeDrug_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            string idrecipedetail = gv_RecipeDrug.DataKeys[e.RowIndex].Values["Id_RecipeDetail"].ToString();
+            if (controller.deleteRecipe(idrecipedetail))
+            {
+                dataRecipeDrug();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Successfully')", true);
+            }
+            else
+            {
+                dataRecipeDrug();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Failed')", true);
+            }
+        }
 
-            /*
-            int index = Convert.ToInt32(e.RowIndex);
-            controller.deleteDataRecipeDrug(index);
-            gv_RecipeDrug.DataSource = controller.dataRecipeDrug();
-            */
-            //DataTable dt = ViewState["dt"] as DataTable;
-            //dt.Rows[index].Delete();
-            //ViewState["dt"] = dt;
-            //gv_RecipeDrug.DataSource = dt;
-            //gv_RecipeDrug.DataBind();
+        protected void txtSearchDrugRecipe_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearchDrugRecipe.Text != "")
+            {
+                gv_RecipeDrug.DataSource = controller.searchDataRecipeDrug(txtIdRecipe.Text, txtSearchDrugRecipe.Text);
+                gv_RecipeDrug.DataBind();
+            }
+            else
+            {
+                dataRecipeDrug();
+            }
+        }
+
+        protected void txtSearchRecipe_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearchRecipe.Text != "")
+            {
+                gv_Recipe.DataSource = controller.searchonRequestRecipe(txtSearchRecipe.Text);
+                gv_Recipe.DataBind();
+            }
+            else
+            {
+                dataRecipe();
+            }
+        }
+
+        protected void txtSearchDrug_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearchDrug.Text != "")
+            {
+                gv_Drug.DataSource = dc.searchDrugData(txtSearchDrug.Text);
+                gv_Drug.DataBind();
+            }
+            else
+            {
+                dataDrug();
+            }
+        }
+
+        protected void gv_RecipeDrug_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dataRecipeDrug();
+            gv_RecipeDrug.PageIndex = e.NewPageIndex;
+            gv_RecipeDrug.DataBind();
+        }
+
+        private bool valid()
+        {
+            if(txtIdDrug.Text == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select Id Drug from table Drug below')", true);
+                return false;
+            }else if(txtQty.Text == "" || Regex.IsMatch(txtQty.Text, @"^\d+$") == false)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please insert valid qty')", true);
+                return false;
+            }else if(expdate == date)
+            {
+                txtIdDrug.Text = "";
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Can not save record because drug has been expired')", true);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

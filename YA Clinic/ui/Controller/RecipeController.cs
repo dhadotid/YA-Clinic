@@ -37,6 +37,26 @@ namespace YA_Clinic.ui.Controller
             }
             return ds;
         }
+        
+        public DataSet searchRecipeData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select b.Id_RecipeDetail, a.Id_Recipe, e.Patient_Name, c.DrugName, c.DrugType, b.Qty, d.Diagnose from Recipe.Recipe a join Recipe.RecipeDetail b on b.Id_Recipe = a.Id_Recipe join Recipe.Drug c on b.Id_Drug = c.Id_Drug join Patient.Treatment d on d.Id_Recipe = a.Id_Recipe join Patient.Patient e on e.Id_Patient = d.Id_Patient where b.Id_RecipeDetail like '%" + search + "%' or a.Id_Recipe like '%" + search + "%' or e.Patient_Name like '%" + search + "%' or c.DrugName like '%" + search + "%' or c.DrugType like '%" + search + "%' or b.Qty like '%" + search + "%' or d.Diagnose like '%" + search + "%'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
 
         public DataSet onRequestRecipe()
         {
@@ -45,6 +65,26 @@ namespace YA_Clinic.ui.Controller
             {
                 sqlCon.Open();
                 string query = "select a.Id_Recipe, b.Patient_Name, c.Diagnose from Patient.Treatment c join Patient.Patient b on c.Id_Patient = b.Id_Patient join Recipe.Recipe a on c.Id_Recipe = a.Id_Recipe join Patient.Payment x on c.Id_Treatment = x.Id_Treatment where x.isPay = 0";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
+
+        public DataSet searchonRequestRecipe(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select a.Id_Recipe, b.Patient_Name, c.Diagnose from Patient.Treatment c join Patient.Patient b on c.Id_Patient = b.Id_Patient join Recipe.Recipe a on c.Id_Recipe = a.Id_Recipe join Patient.Payment x on c.Id_Treatment = x.Id_Treatment where x.isPay = 0 and a.Id_Recipe like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or c.Diagnose like '%" + search + "%'";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(ds);
@@ -133,6 +173,27 @@ namespace YA_Clinic.ui.Controller
             return ds;
         }
 
+        public DataSet searchDataRecipeDrug(string idrecipe, string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select a.Id_RecipeDetail, a.Id_Recipe, b.DrugName, a.Qty, a.Dose, a.Subtotal from Recipe.RecipeDetail a join Recipe.Drug b on a.Id_Drug = b.Id_Drug where a.Id_Recipe = '" + idrecipe + "' and a.isDraft = '0' and a.Id_RecipeDetail like '%" + search + "%' or a.Id_Recipe like '%" + search + "%' or b.DrugName like '%" + search + "%' or a.Qty like '%" + search + "%' or a.Dose like '%" + search + "%' or a.Subtotal like '%" + search + "%'";
+                //string query = "select * from Recipe.RecipeDetail where Id_Recipe = '" + idrecipe + "' and isDraft = '0'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
+
         public void draftData(string idrecipe, string iddrug, string qty, string dose)
         {
             sqlCon = con.openConnection();
@@ -154,6 +215,39 @@ namespace YA_Clinic.ui.Controller
                 }
                 sqlCom.Clone();
             }
+        }
+
+        public bool deleteRecipe(string idrecipedetail)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                sqlCom = new SqlCommand("delete from Recipe.RecipeDetail where Id_RecipeDetail = '" + idrecipedetail + "'", sqlCon);
+                int result = sqlCom.ExecuteNonQuery();
+                sqlCon.Close();
+                if (result > 0)
+                {
+                    return true;
+                    //lblmsg.BackColor = Color.Red;
+                    //lblmsg.ForeColor = Color.White;
+                    //lblmsg.Text = stor_id + "      Deleted successfully.......    ";
+                }
+            }
+            return false;
+        }
+
+        public DataTable getSpesificValueDrug(string idDrug)
+        {
+            sqlCon = con.openConnection();
+            sqlCom = new SqlCommand("select * from Recipe.Drug where Id_Drug = @iddrug", sqlCon);
+            sqlCom.Parameters.AddWithValue("@iddrug", idDrug);
+            sqlDa = new SqlDataAdapter(sqlCom);
+            sqlDa.Fill(dt);
+            sqlCon.Open();
+            int i = sqlCom.ExecuteNonQuery();
+            sqlCon.Close();
+            return dt;
         }
     }
 }

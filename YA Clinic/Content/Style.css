@@ -93,6 +93,10 @@ header {
     text-decoration: none;
 }
 
+.white-color{
+    color: white;
+}
+
 .table-grid
 {
     float:left;
@@ -106,7 +110,9 @@ header {
     max-width:280px;
 }
 
-
+.max-grid {
+    max-width:380px;
+}
 
 .pagination-dha {
     /*display: inline-block;*/

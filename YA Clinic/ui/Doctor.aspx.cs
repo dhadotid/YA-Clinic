@@ -32,6 +32,7 @@ namespace YA_Clinic.form
                 if (Session["access"].ToString().Equals("0"))
                 {
                     btnAddnNew.Visible = false;
+                    dgv_Doctor.Columns[6].Visible = false;
                 }
                 return true;
             }
@@ -43,7 +44,7 @@ namespace YA_Clinic.form
 
         private void doctorData()
         {
-            dgv_Doctor.DataSource = dc.doctorData(); ;
+            dgv_Doctor.DataSource = dc.doctorData();
             dgv_Doctor.DataBind();
         }
 
@@ -61,6 +62,23 @@ namespace YA_Clinic.form
             {
                 doctorData();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Successfully')", true);
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Deleted Failed')", true);
+            }
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                dgv_Doctor.DataSource = dc.searchDoctorData(txtSearch.Text);
+                dgv_Doctor.DataBind();
+            }
+            else
+            {
+                doctorData();
             }
         }
     }

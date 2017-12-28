@@ -12,7 +12,7 @@ namespace YA_Clinic.ui
     {
         string idPatient;
         string idDoctor;
-        string date = DateTime.Now.ToString("yyyy-MM-dd");
+        string date = DateTime.Now.ToString("dd/MM/yyyy");
         TreatmentController controller = new TreatmentController();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace YA_Clinic.ui
             {
                 if (Session["access"].ToString().Equals("0"))
                 {
-                    //Response.Redirect("~/ui/Dashboard.aspx");
+                    Response.Redirect("~/ui/Dashboard.aspx");
                 }
                 return true;
             }
@@ -133,6 +133,34 @@ namespace YA_Clinic.ui
                 return false;
             }
             return true;
+        }
+
+        protected void txtSearchPatient_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearchPatient.Text != "")
+            {
+                dgv_Patient.DataSource = controller.searchPatientData(txtSearchPatient.Text);
+                dgv_Patient.DataBind();
+            }
+            else
+            {
+                dgv_Patient.DataSource = controller.patientData();
+                dgv_Patient.DataBind();
+            }
+        }
+
+        protected void txtSearchDoctor_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearchDoctor.Text != "")
+            {
+                dgv_Doctor.DataSource = controller.searchDoctorData(txtSearchDoctor.Text);
+                dgv_Doctor.DataBind();
+            }
+            else
+            {
+                dgv_Doctor.DataSource = controller.doctorData();
+                dgv_Doctor.DataBind();
+            }
         }
     }
 }

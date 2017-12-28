@@ -51,5 +51,18 @@ namespace YA_Clinic.ui
             dgv_Recipe.PageIndex = e.NewPageIndex;
             dgv_Recipe.DataBind();
         }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                dgv_Recipe.DataSource = controller.searchRecipeData(txtSearch.Text);
+                dgv_Recipe.DataBind();
+            }
+            else
+            {
+                onRequestData();
+            }
+        }
     }
 }

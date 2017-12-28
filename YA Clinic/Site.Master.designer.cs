@@ -37,7 +37,7 @@ namespace YA_Clinic {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor tvNama2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tvNama2;
         
         /// <summary>
         /// btnLogout control.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,28 +13,61 @@ namespace YA_Clinic
     public partial class PatientDetail : System.Web.UI.Page
     {
         string jeniskelamin = "";
+        string idnya;
+        DataTable dt = new DataTable();
         string date = DateTime.Now.ToString("dd/MM/yyyy");
         PatientController controller = new PatientController();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idpatient.Value = controller.AutoGenerateID();
-            txtname.Focus();
 
             if (!isLogin())
             {
                 Response.Redirect("~/ui/Login.aspx");
             }
+            cekAdd();
         }
 
+        private void cekAdd()
+        {
+            idnya = Request.QueryString["ID"];
+            if (Request.QueryString["Status"] == "Update")
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    Response.Redirect("~/ui/Dashboard.aspx");
+                }
+                if (idnya != "")
+                {
+                    dt = controller.getDetailPatient(idnya);
+                    idpatient.Value = idnya;
+                    txtname.Value = dt.Rows[0][1].ToString();
+                    txtdob.Value = Convert.ToDateTime(dt.Rows[0][2]).ToString("dd/MM/yyyy");
+                    txtaddress.Value = dt.Rows[0][3].ToString();
+                    if (dt.Rows[0][4].ToString() == "Male")
+                    {
+                        RadioMale.Checked = true;
+                    }
+                    else if (dt.Rows[0][4].ToString() == "Female")
+                    {
+                        RadioFemale.Checked = true;
+                    }
+                    tulisanatas.InnerText = "Update Data Patient";
+                    btnSave.Text = "Update";
+                    btnSave.CommandName = "Update";
+                }
+            }
+            else if (Request.QueryString["Status"] == "Add")
+            {
+                idpatient.Value = controller.AutoGenerateID();
+                txtname.Focus();
+            }
+        }
+        
         private bool isLogin()
         {
             if (Session["nama"] != null)
             {
-                if (Session["access"].ToString().Equals("0"))
-                {
-                    
-                }
                 return true;
             }
             else
@@ -64,14 +98,20 @@ namespace YA_Clinic
                 }
                 else
                 {
-                    controller.Save(name, dob, address, jeniskelamin);
+                    if(btnSave.CommandName == "Save")
+                    {
+                        controller.Save(name, dob, address, jeniskelamin);
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
 
-                    Response.Redirect("~/ui/Patient.aspx");
+                        Response.Redirect("~/ui/Patient.aspx");
+                    }
+                    else if(btnSave.CommandName == "Update")
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Updatenya belum dicoding')", true);
+                    }
                 }
             }
-            
         }
 
         private bool validate()

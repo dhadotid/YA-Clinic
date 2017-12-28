@@ -11,7 +11,7 @@
                 </div> -->
               <fieldset>
                   <div class="col-sm-2">
-                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control" AutoPostBack="True" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
                     <a href="AddRecipe.aspx" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;">Add New Data Recipe</a>
@@ -61,7 +61,7 @@
 
         <HeaderStyle HorizontalAlign="Center"/>
         <RowStyle HorizontalAlign="Center" />
-        <PagerStyle HorizontalAlign="Center"/>
+        <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
 
     </asp:GridView>
 

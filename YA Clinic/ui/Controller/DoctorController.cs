@@ -35,6 +35,26 @@ namespace YA_Clinic.ui.Controller
             }
         }
 
+        public DataSet searchDoctorData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select * from Doctor.Doctor where Id_Doctor like '%" + search + "%' or Id_Specialist like '%" + search + "%' or DoctorName like '%" + search + "%' or DoctorGender like '%" + search + "%' or DateOfBirth like '%" + search + "%' or Phone like '%" + search + "%'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+                return ds;
+            }
+        }
+
         public bool deleteData(string iddoctor)
         {
             sqlCon = con.openConnection();

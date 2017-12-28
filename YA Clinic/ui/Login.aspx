@@ -40,7 +40,7 @@
             <div class="registrationform">
                 <div class="form-horizontal">
                     <fieldset>
-                        <legend>Login Form <i class="fa fa-pencil pull-right"></i></legend>
+                        <legend>Login Form <i class="fa fa-lock pull-right"></i></legend>
                         <div class="form-group">
                             <asp:Label ID="lblUsername" runat="server" Text="Username" CssClass="col-lg-2 control-label"></asp:Label>
                             <div class="col-lg-10">
@@ -74,8 +74,8 @@
         /* ========================== */
         /* ::::::: Backstrech ::::::: */
         /* ========================== */
-        // You may also attach Backstretch to a block-level element
         $.backstretch(
+        // You may also attach Backstretch to a block-level element
         [
             "../Content/img/backgrounds/1.jpg",
             "../Content/img/backgrounds/2.jpg",

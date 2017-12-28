@@ -59,6 +59,26 @@ namespace YA_Clinic.ui.Controller
             return ds;
         }
 
+        public DataSet searchPatientData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select Id_Patient, Patient_Name from Patient.Patient where Id_Patient like '%" + search + "%' or  Patient_Name like '%" + search + "%' order by Patient_Name asc";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if(ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
+
         public DataSet doctorData()
         {
             sqlCon = con.openConnection();
@@ -78,6 +98,27 @@ namespace YA_Clinic.ui.Controller
             }
             return dsd;
         }
+
+        public DataSet searchDoctorData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select a.Id_Doctor, a.DoctorName, b.Specialist, b.Fare from Doctor.Doctor a join Doctor.Specialist b on a.Id_Specialist = b.Id_Specialist where a.Id_Doctor like '%" + search + "%' or a.DoctorName like '%" + search + "%' or b.Specialist like '%" + search + "%' or b.Fare like '%" + search + "' order by a.DoctorName asc";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(dsd);
+                int count = dsd.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (dsd.Tables[0].Rows.Count > 0)
+                {
+                    return dsd;
+                }
+            }
+            return dsd;
+        }
+
         public string AutoGenerateID()
         {
             Connection con = new Connection();
@@ -193,6 +234,26 @@ namespace YA_Clinic.ui.Controller
             {
                 sqlCon.Open();
                 string query = "select a.Id_Treatment as Id_Treatment, b.Patient_Name as Patient_Name, c.DoctorName as DoctorName, a.Id_Recipe as Id_Recipe, a.Diagnose as Diagnose, a.DateTreatment as DateTreatment from Patient.Treatment a join Patient.Patient b on a.Id_Patient = b.Id_Patient join Doctor.Doctor c on a.Id_Doctor = c.Id_Doctor";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(dsTreat);
+                int count = dsTreat.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (dsTreat.Tables[0].Rows.Count > 0)
+                {
+                    return dsTreat;
+                }
+                return dsTreat;
+            }
+        }
+
+        public DataSet searchTreatmentData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select a.Id_Treatment, b.Patient_Name, c.DoctorName, a.Id_Recipe, a.Diagnose, a.DateTreatment from Patient.Treatment a join Patient.Patient b on a.Id_Patient = b.Id_Patient join Doctor.Doctor c on a.Id_Doctor = c.Id_Doctor where a.Id_Treatment like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or c.DoctorName like '%" + search + "%' or a.Id_Recipe like '%" + search + "%' or a.Diagnose like '%" + search + "%' or a.DateTreatment like '%" + search + "%'";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(dsTreat);

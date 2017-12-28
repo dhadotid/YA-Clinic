@@ -13,6 +13,7 @@ namespace YA_Clinic
         SqlConnection sqlCon;
         SqlDataAdapter sqlDa;
         DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
         Connection con = new Connection();
         public void Save(string Name, string dob, string Address, string JenisKelamin)
         {
@@ -35,6 +36,18 @@ namespace YA_Clinic
                 }
                 sqlCom.Clone();
             }
+        }
+
+        public DataTable getDetailPatient(string idpatient)
+        {
+            sqlCon = con.openConnection();
+            sqlCom = new SqlCommand("select * from Patient.Patient where Id_Patient like '" + idpatient + "'", sqlCon);
+            sqlDa = new SqlDataAdapter(sqlCom);
+            sqlDa.Fill(dt);
+            sqlCon.Open();
+            int i = sqlCom.ExecuteNonQuery();
+            sqlCon.Close();
+            return dt;
         }
         public string AutoGenerateID()
         {
@@ -96,6 +109,26 @@ namespace YA_Clinic
             {
                 sqlCon.Open();
                 string query = "select * from Patient.Patient";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
+
+        public DataSet searchPatientData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select * from Patient.Patient where Id_Patient like '%" + search + "%' or Patient_Name like '%" + search + "%' or DateOfBirth like '%" + search + "%' or Address like '%" + search + "%' or GenderPatient like '%" + search + "%'";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(ds);

@@ -24,7 +24,7 @@
     <form id="masterform" runat="server">
         <header>
             <input type="checkbox" id="tag-menu"/>
-            <label class="menu-bar" for="tag-menu">YA Clinic</label>
+            <label class="menu-bar" for="tag-menu" data-toggle="tooltip" data-placement="bottom" title="Menu">YA Clinic</label>
             <div class="jw-drawer">
                 <nav>
                     <ul>
@@ -47,10 +47,11 @@
                     </ul>
                 </nav>
             </div>
-            <ul class="menu-bar" style="float: right;">
+            <ul class="white-color" style="float: right;" data-toggle="tooltip" data-placement="left" title="Account Setting">
                 <!--<asp:Label CssClass="dropdown-toggle" runat="server" ID="tvNama"></asp:Label>-->
                 <li class="dropdown no-bullets" style="margin-right: 40px;">
-                    <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" id="tvNama2">Hi, Account<span class="caret"></span></a>
+                    <label class="menu-bar dropdown-toggle" for="tag-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" id="tvNama2">Hi, Account<span class="caret"></span></label>
+                    
                     <ul class="dropdown-menu dropdown-color">
                         <li><a href="#">Change Password</a></li>
                         <li>
@@ -73,6 +74,11 @@
       $(document).ready(function(){
         $('.table').DataTable();
       });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     </script>
 </body>
 </html>

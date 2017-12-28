@@ -32,6 +32,7 @@ namespace YA_Clinic
                 if (Session["access"].ToString().Equals("0"))
                 {
                     btnAddnNew.Visible = false;
+                    gv_Specialist.Columns[3].Visible = false;
                 }
                 return true;
             }
@@ -67,6 +68,19 @@ namespace YA_Clinic
         protected void btnAddnNew_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/ui/AddSpecialist.aspx");
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                gv_Specialist.DataSource = sc.searchSpecialistData(txtSearch.Text);
+                gv_Specialist.DataBind();
+            }
+            else
+            {
+                SpecialistData();
+            }
         }
     }
 }

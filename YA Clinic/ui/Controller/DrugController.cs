@@ -88,6 +88,26 @@ namespace YA_Clinic.ui.Controller
             return ds;
         }
 
+        public DataSet searchDrugData(string search)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select * from Recipe.Drug where Id_Drug like '%" + search + "%' or DrugName like '%" + search + "%' or DrugType like '%" + search + "%' or Stock like '%" + search + "%' or ExpDate like '%" + search + "%' or Price like '%" + search + "%'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+            }
+            return ds;
+        }
+
         public void Save(string drugName, string drugType, string drugStock, string expDate, string price)
         {
             sqlCon = con.openConnection();

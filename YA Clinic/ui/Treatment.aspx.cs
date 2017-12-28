@@ -32,7 +32,7 @@ namespace YA_Clinic.ui
             {
                 if (Session["access"].ToString().Equals("0"))
                 {
-                    
+                    btnAddnNew.Visible = false;
                 }
                 return true;
             }
@@ -52,6 +52,24 @@ namespace YA_Clinic.ui
             treatmentData();
             dgv_Treatment.PageIndex = e.NewPageIndex;
             dgv_Treatment.DataBind();
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSearch.Text != "")
+            {
+                dgv_Treatment.DataSource = tc.searchTreatmentData(txtSearch.Text);
+                dgv_Treatment.DataBind();
+            }
+            else
+            {
+                treatmentData();
+            }
+        }
+
+        protected void btnAddnNew_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ui/AddTreatment.aspx");
         }
     }
 }

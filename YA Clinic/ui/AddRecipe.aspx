@@ -73,9 +73,9 @@
                         <td>&nbsp;&nbsp;&nbsp;
                             <asp:Label ID="lblDataRecipe" runat="server" Text="Data Recipe Drug" style="font-weight: 700"></asp:Label>
                                     <br />
-                                    <asp:TextBox ID="txtSearchDrugRecipe" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Recipe Drug" Width="472px"></asp:TextBox>
+                                    <asp:TextBox ID="txtSearchDrugRecipe" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Recipe Drug" Width="472px" AutoPostBack="True" OnTextChanged="txtSearchDrugRecipe_TextChanged"></asp:TextBox>
                                     <br />
-                                <asp:GridView ID="gv_RecipeDrug" DataKeyNames="Id_RecipeDetail" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnRowDeleting="gv_RecipeDrug_RowDeleting">
+                                <asp:GridView ID="gv_RecipeDrug" DataKeyNames="Id_RecipeDetail" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid max-grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnRowDeleting="gv_RecipeDrug_RowDeleting" OnPageIndexChanging="gv_RecipeDrug_PageIndexChanging">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Id RecipeDetail">
                                             <ItemTemplate>
@@ -104,7 +104,7 @@
                                             </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Subtotal">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblSubtotal" runat="server" Text='<%#Eval("Subtotal") %>'/>
+                                                    <asp:Label ID="lblSubtotal" runat="server" Text='<%#Eval("Subtotal", "{0:C2}") %>'/>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                         <asp:TemplateField HeaderText="">
@@ -113,6 +113,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                     </Columns>
+                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
                                 </asp:GridView>
 
                         </td>
@@ -125,7 +126,7 @@
                                     <br />
                                     <asp:Label ID="lblRecipe" runat="server" Text="Data Recipe" style="font-weight: 700"></asp:Label>
                                     <br />
-                                    <asp:TextBox ID="txtSearchRecipe" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Recipe" Width="472px"></asp:TextBox>
+                                    <asp:TextBox ID="txtSearchRecipe" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Recipe" Width="472px" AutoPostBack="True" OnTextChanged="txtSearchRecipe_TextChanged"></asp:TextBox>
                                     <br />
                                 <asp:GridView ID="gv_Recipe" DataKeyNames="Id_Recipe" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="gv_Recipe_PageIndexChanging" OnRowCommand="gv_Recipe_RowCommand">
                                     <Columns>
@@ -150,6 +151,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                     </Columns>
+                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
                                 </asp:GridView>
 
                                 </div>
@@ -157,7 +159,7 @@
                                     <br />
                                     <asp:Label ID="lblDrugData" runat="server" Text="Data Drug" style="font-weight: 700"></asp:Label>
                                     <br />
-                                    <asp:TextBox ID="txtSearchDrug" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Drug" Width="472px"></asp:TextBox>
+                                    <asp:TextBox ID="txtSearchDrug" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Drug" Width="472px" AutoPostBack="True" OnTextChanged="txtSearchDrug_TextChanged"></asp:TextBox>
                                     <br />
                                 <asp:GridView ID="gv_Drug" DataKeyNames="Id_Drug" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="gv_Drug_PageIndexChanging" OnSelectedIndexChanged="gv_Drug_SelectedIndexChanged">
                                     <Columns>
@@ -178,17 +180,17 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Stock">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblStock" runat="server" Text='<%#Eval("Stock") %>'/>
+                                            <asp:Label ID="lblStockDrug" runat="server" Text='<%#Eval("Stock") %>'/>
                                         </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="ExpDate">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblExpDate" runat="server" Text='<%#Eval("ExpDate") %>'/>
+                                            <asp:Label ID="lblExpDate" runat="server" Text='<%#Eval("ExpDate", "{0:dd/MM/yyyy}") %>'/>
                                         </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Price">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblPrice" runat="server" Text='<%#Eval("Price") %>'/>
+                                            <asp:Label ID="lblPrice" runat="server" Text='<%#Eval("Price", "{0:C2}") %>'/>
                                         </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="">
@@ -197,6 +199,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                     </Columns>
+                                    <PagerStyle HorizontalAlign="Center" CssClass="pagination-dha"/>
                                 </asp:GridView>
                                 </div>
                             </div>
