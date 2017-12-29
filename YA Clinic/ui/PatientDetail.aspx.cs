@@ -25,7 +25,10 @@ namespace YA_Clinic
             {
                 Response.Redirect("~/ui/Login.aspx");
             }
-            cekAdd();
+            if (!Page.IsPostBack)
+            {
+                cekAdd();
+            }
         }
 
         private void cekAdd()
@@ -40,10 +43,10 @@ namespace YA_Clinic
                 if (idnya != "")
                 {
                     dt = controller.getDetailPatient(idnya);
-                    idpatient.Value = idnya;
-                    txtname.Value = dt.Rows[0][1].ToString();
-                    txtdob.Value = Convert.ToDateTime(dt.Rows[0][2]).ToString("dd/MM/yyyy");
-                    txtaddress.Value = dt.Rows[0][3].ToString();
+                    idpatient.Text = idnya;
+                    txtname.Text = dt.Rows[0][1].ToString();
+                    txtdob.Text = Convert.ToDateTime(dt.Rows[0][2]).ToString("dd/MM/yyyy");
+                    txtaddress.Text = dt.Rows[0][3].ToString();
                     if (dt.Rows[0][4].ToString() == "Male")
                     {
                         RadioMale.Checked = true;
@@ -54,13 +57,19 @@ namespace YA_Clinic
                     }
                     tulisanatas.InnerText = "Update Data Patient";
                     btnSave.Text = "Update";
-                    btnSave.CommandName = "Update";
+                    btnSave.CommandName = "Update";                    
                 }
             }
             else if (Request.QueryString["Status"] == "Add")
             {
-                idpatient.Value = controller.AutoGenerateID();
+                idpatient.Text = controller.AutoGenerateID();
+                btnSave.Text = "Save";
+                btnSave.CommandName = "Save";
                 txtname.Focus();
+            }
+            else
+            {
+                Response.Redirect("~/ui/Patient.aspx");
             }
         }
         
@@ -80,10 +89,6 @@ namespace YA_Clinic
         {
             if (validate())
             {
-                string ID = idpatient.Value;
-                string name = txtname.Value;
-                string dob = txtdob.Value;
-                string address = txtaddress.Value;
                 if (RadioMale.Checked)
                 {
                     jeniskelamin = "Male";
@@ -92,23 +97,31 @@ namespace YA_Clinic
                 {
                     jeniskelamin = "Female";
                 }
-                if(jeniskelamin == "")
+
+                if (jeniskelamin == "")
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select gender')", true);
                 }
                 else
                 {
-                    if(btnSave.CommandName == "Save")
+                    // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert(' '" + idpatient.Text + txtname.Text + txtdob.Text + txtaddress.Text + "')", true);
+                    if (Request.QueryString["Status"] == "Add")
                     {
-                        controller.Save(name, dob, address, jeniskelamin);
+                        controller.Save(txtname.Text, txtdob.Text, txtaddress.Text, jeniskelamin);
+                        // controller.Save("ABC", txtdob.Text, txtaddress.Text, jeniskelamin);
 
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
 
                         Response.Redirect("~/ui/Patient.aspx");
                     }
-                    else if(btnSave.CommandName == "Update")
+                    else if (Request.QueryString["Status"] == "Update")
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Updatenya belum dicoding')", true);
+                        if(controller.Update(Request.QueryString["ID"].ToString(), txtname.Text, txtdob.Text, txtaddress.Text, jeniskelamin))
+                        {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+
+                        Response.Redirect("~/ui/Patient.aspx");
+                        }
                     }
                 }
             }
@@ -116,17 +129,17 @@ namespace YA_Clinic
 
         private bool validate()
         {
-            if(txtname.Value == "")
+            if(txtname.Text == "")
             {
                 txtname.Focus();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please insert name')", true);
                 return false;
-            }else if(txtaddress.Value == "")
+            }else if(txtaddress.Text == "")
             {
                 txtaddress.Focus();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please insert address')", true);
                 return false;
-            }else if(txtdob.Value == "" || Regex.IsMatch(txtdob.Value, @"^\d{1,2}\/\d{1,2}\/\d{4}$") == false || DateTime.Parse(txtdob.Value) > DateTime.Parse(date))
+            }else if(txtdob.Text == "" || Regex.IsMatch(txtdob.Text, @"^\d{1,2}\/\d{1,2}\/\d{4}$") == false || DateTime.Parse(txtdob.Text) > DateTime.Parse(date))
             {
                 txtdob.Focus();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please insert valid date of birth ex: 01/01/1998')", true);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -22,6 +23,7 @@ namespace YA_Clinic.ui
         protected void Page_Load(object sender, EventArgs e)
         {
             txtIdRecipeDetail.Text = controller.AutoGenerateID();
+            lblDrugPrice.Visible = false;
             if (!isLogin())
             {
                 Response.Redirect("~/ui/Login.aspx");
@@ -102,9 +104,11 @@ namespace YA_Clinic.ui
             if (rows != null)
             {
                 txtIdDrug.Text = (rows.FindControl("lblIdDrug") as Label).Text;
+                dt = controller.getSpesificValueDrug(txtIdDrug.Text);
+                lblDrugPrice.Text = dt.Rows[0][5].ToString();
                 drugQty = (rows.FindControl("lblStockDrug") as Label).Text;
                 expdate = (rows.FindControl("lblExpDate") as Label).Text;
-                harga = (rows.FindControl("lblPrice") as Label).Text;
+                // = (rows.FindControl("lblPrice") as Label).Text;
                 if (Convert.ToInt32(drugQty) > 1 && Convert.ToInt32(drugQty) < 20)
                 {
                     //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('The remaining drug '" + drugQty +"')", true);
@@ -191,6 +195,16 @@ namespace YA_Clinic.ui
             else
             {
                 dataDrug();
+            }
+        }
+
+        protected void txtQty_TextChanged(object sender, EventArgs e)
+        {
+            double price = Convert.ToDouble(lblDrugPrice.Text);
+            if (txtQty.Text != "")
+            {
+                int subtotal = Convert.ToInt32(txtQty.Text) * Convert.ToInt32(price);
+                txtSubtotal.Text = string.Format(CultureInfo.GetCultureInfo("id-ID"), "{0:C2}", subtotal);
             }
         }
 

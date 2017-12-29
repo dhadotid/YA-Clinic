@@ -18,7 +18,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="idpatient">Id Patient</label>
                   <div class="col-md-9">
-                    <input id="idpatient" name="idpatient" runat="server" type="text" placeholder="Id Patient" class="form-control">
+                      <asp:TextBox ID="idpatient" runat="server" placeholder="Id Patient" CssClass="form-control"></asp:TextBox>
                   </div>
                 </div>
                     </fieldset>
@@ -26,21 +26,21 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtname">Patient Name</label>
                   <div class="col-md-9">
-                    <input id="txtname" name="txtname" runat="server" type="text" placeholder="Patient Name" class="form-control">
+                      <asp:TextBox ID="txtname" runat="server" placeholder="Patient Name" CssClass="form-control"></asp:TextBox>                    
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtdob">Date Of Birth</label>
                   <div class="col-md-9">
-                    <input id="txtdob" name="txtdob" runat="server" type="text" placeholder="Please insert with format dd/MM/yyyy" class="form-control">
+                      <asp:TextBox ID="txtdob" runat="server" placeholder="Please insert with format dd/MM/yyyy" CssClass="form-control"></asp:TextBox>
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtaddress">Address</label>
                   <div class="col-md-9">
-                    <textarea class="form-control" runat="server" id="txtaddress" name="txtaddress" placeholder="Address" rows="5"></textarea>
+                      <asp:TextBox ID="txtaddress" runat="server" placeholder="Address" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                   </div>
                 </div>
                 
@@ -65,7 +65,7 @@
                 <div class="form-group">
                   <div class="col-md-12 text-right">
                     
-                      <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary btn-lg" Text="Save" OnClick="btnSave_Click" />
+                      <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary btn-lg" Text="Save" OnClick="btnSave_Click" value="Save"/>
                     
                   </div>
                 </div>

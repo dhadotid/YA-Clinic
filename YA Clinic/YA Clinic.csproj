@@ -222,6 +222,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Style.css" />
+    <Content Include="ui\AddDoctor.aspx" />
     <Content Include="ui\AddDrug.aspx" />
     <Content Include="ui\AddPayment.aspx" />
     <Content Include="ui\AddRecipe.aspx" />
@@ -419,6 +420,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="model\PaymentHelperModel.cs" />
+    <Compile Include="ui\AddDoctor.aspx.cs">
+      <DependentUpon>AddDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\AddDoctor.aspx.designer.cs">
+      <DependentUpon>AddDoctor.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ui\AddDrug.aspx.cs">
       <DependentUpon>AddDrug.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

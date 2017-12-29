@@ -9,8 +9,8 @@ namespace YA_Clinic.ui.Controller
 {
     public class RecipeController
     {
-        string drugName;
-        DataRow dr;
+        //string drugName;
+        //DataRow dr;
         SqlCommand sqlCom;
         SqlConnection sqlCon;
         SqlDataAdapter sqlDa;

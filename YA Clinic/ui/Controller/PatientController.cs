@@ -154,12 +154,34 @@ namespace YA_Clinic
                 if (result == 1)
                 {
                     return true;
-                    //lblmsg.BackColor = Color.Red;
-                    //lblmsg.ForeColor = Color.White;
-                    //lblmsg.Text = stor_id + "      Deleted successfully.......    ";
                 }
                 return false;
             }
         }
+        public bool Update(string idpatient, string patientName, string dateofbirth, string address, string genderpatient)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "exec pcduptPatient @idpatient, @name, @dob, @address, @gender";
+                //string query = "update Patient.Patient set Patient_Name = @name, DateOfBirth = @dob, Address = @address, GenderPatient = @gender where Id_Patient = @idpatient";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlCom.Parameters.AddWithValue("@idpatient", idpatient);
+                sqlCom.Parameters.AddWithValue("@name", patientName);
+                sqlCom.Parameters.AddWithValue("@dob", Convert.ToDateTime(dateofbirth).ToString("yyyy-MM-dd"));
+                sqlCom.Parameters.AddWithValue("@address", address);
+                sqlCom.Parameters.AddWithValue("@gender", genderpatient);
+                if(sqlCom.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

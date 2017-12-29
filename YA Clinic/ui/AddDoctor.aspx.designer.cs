@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YA_Clinic {
+namespace YA_Clinic.ui {
     
     
-    public partial class PatientDetail {
+    public partial class AddDoctor {
         
         /// <summary>
         /// tulisanatas control.
@@ -22,40 +22,31 @@ namespace YA_Clinic {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tulisanatas;
         
         /// <summary>
-        /// idpatient control.
+        /// txtIdDoctor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox idpatient;
+        protected global::System.Web.UI.WebControls.TextBox txtIdDoctor;
         
         /// <summary>
-        /// txtname control.
+        /// DDIdSpecialist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtname;
+        protected global::System.Web.UI.WebControls.DropDownList DDIdSpecialist;
         
         /// <summary>
-        /// txtdob control.
+        /// txtDoctorname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtdob;
-        
-        /// <summary>
-        /// txtaddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtaddress;
+        protected global::System.Web.UI.WebControls.TextBox txtDoctorname;
         
         /// <summary>
         /// RadioMale control.
@@ -74,6 +65,24 @@ namespace YA_Clinic {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton RadioFemale;
+        
+        /// <summary>
+        /// txtDateofbirth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateofbirth;
+        
+        /// <summary>
+        /// txtPhonenumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPhonenumber;
         
         /// <summary>
         /// btnSave control.

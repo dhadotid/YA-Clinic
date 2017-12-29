@@ -10,7 +10,7 @@
                 <br>
 
                 <center>
-                <h2 id="tulisanatas">Add New Data Specialist</h2>
+                <h2 id="tulisanatas" runat="server">Add New Data Specialist</h2>
                 </center>
                 <hr>
 
@@ -33,7 +33,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtFare">Fare</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtFare" runat="server" placeholder="Fare" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtFare" runat="server" placeholder="Fare" CssClass="form-control" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
                   </div>
                 </div>
                 

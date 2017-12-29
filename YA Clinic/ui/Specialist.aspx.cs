@@ -67,7 +67,8 @@ namespace YA_Clinic
 
         protected void btnAddnNew_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ui/AddSpecialist.aspx");
+            string status = "Add";
+            Response.Redirect("~/ui/AddSpecialist.aspx?Status=" + status);
         }
 
         protected void txtSearch_TextChanged(object sender, EventArgs e)
@@ -80,6 +81,17 @@ namespace YA_Clinic
             else
             {
                 SpecialistData();
+            }
+        }
+
+        protected void gv_Specialist_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string status = "Update";
+            if (e.CommandName == "Update")
+            {
+                GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                string idSpecialist = gv_Specialist.DataKeys[row.RowIndex].Value.ToString();
+                Response.Redirect("~/ui/AddSpecialist.aspx?Status=" + status + "&ID=" + idSpecialist);
             }
         }
     }

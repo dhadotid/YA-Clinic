@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -11,18 +12,60 @@ namespace YA_Clinic.ui
 {
     public partial class AddDrug : System.Web.UI.Page
     {
+        string idnya;
+        DataTable dt = new DataTable();
         DrugController controller = new DrugController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 txtIdDrug.Text = controller.AutoGenerateID();
+                cekAdd();
             }
             if (!isLogin())
             {
                 Response.Redirect("~/ui/Login.aspx");
             }
         }
+
+        private void cekAdd()
+        {
+            idnya = Request.QueryString["ID"];
+            if (Request.QueryString["Status"] == "Update")
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    Response.Redirect("~/ui/Dashboard.aspx");
+                }
+                if (idnya != "")
+                {
+                    dt = controller.getDetailDrug(idnya);
+                    txtIdDrug.Text = idnya;
+                    txtDrugName.Text = dt.Rows[0][1].ToString();
+                    string drugType = dt.Rows[0][2].ToString().Trim();
+                    DDdrugType.Items.FindByText(drugType).Selected = true;
+                    txtStock.Text = dt.Rows[0][3].ToString();
+                    txtExpDate.Text = Convert.ToDateTime(dt.Rows[0][4]).ToString("dd/MM/yyyy");
+                    double price = Convert.ToDouble(dt.Rows[0][5].ToString());
+                    txtPrice.Text = Convert.ToInt32(price).ToString();
+                    tulisanatas.InnerText = "Update Data Patient";
+                    btnSave.Text = "Update";
+                    btnSave.CommandName = "Update";
+                }
+            }
+            else if (Request.QueryString["Status"] == "Add")
+            {
+                txtIdDrug.Text = controller.AutoGenerateID();
+                btnSave.Text = "Save";
+                btnSave.CommandName = "Save";
+                txtDrugName.Focus();
+            }
+            else
+            {
+                Response.Redirect("~/ui/AddDrug.aspx");
+            }
+        }
+
         private bool isLogin()
         {
             if (Session["nama"] != null)
@@ -41,7 +84,7 @@ namespace YA_Clinic.ui
 
         private bool valid()
         {
-            string date = DateTime.Now.AddDays(+5).ToString("yyyy-MM-dd");
+            string date = DateTime.Now.AddDays(+5).ToString("dd/MM/yyyy");
             if (txtDrugName.Text == "")
             {
                 txtDrugName.Focus();
@@ -78,11 +121,21 @@ namespace YA_Clinic.ui
         {
             if (valid())
             {
-                controller.Save(txtDrugName.Text, DDdrugType.Text, txtStock.Text, txtExpDate.Text, txtPrice.Text);
+                if(btnSave.CommandName == "Save")
+                {
+                    controller.Save(txtDrugName.Text, DDdrugType.Text, txtStock.Text, txtExpDate.Text, txtPrice.Text);
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
 
-                Response.Redirect("~/ui/Drug.aspx");
+                    Response.Redirect("~/ui/Drug.aspx");
+                }else if(btnSave.CommandName == "Update")
+
+                    if (controller.Update(Request.QueryString["ID"].ToString(), txtDrugName.Text, DDdrugType.Text, txtStock.Text, txtExpDate.Text, txtPrice.Text))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+
+                        Response.Redirect("~/ui/Drug.aspx");
+                    }
             }
         }
     }

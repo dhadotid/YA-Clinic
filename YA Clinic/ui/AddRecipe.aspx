@@ -42,7 +42,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtQty">Qty</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtQty" runat="server" placeholder="Please insert qty" CssClass="form-control" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
+                    <asp:TextBox ID="txtQty" runat="server" placeholder="Please insert qty" CssClass="form-control" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" AutoPostBack="True" OnTextChanged="txtQty_TextChanged"></asp:TextBox>
                   </div>
                 </div>
 
@@ -57,13 +57,15 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtSubtotal">Subtotal</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtSubtotal" runat="server" placeholder="Subtotal" CssClass="form-control" Enabled="False"></asp:TextBox>
+                    <asp:TextBox ID="txtSubtotal" runat="server" placeholder="Subtotal" CssClass="form-control" Enabled="False" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
                   </div>
                 </div>
                 </fieldset>
 
                 <div class="form-group">
                   <div class="col-md-12 text-right">
+                    
+                      <asp:Label ID="lblDrugPrice" runat="server" Text="Label"></asp:Label>
                     
                       <asp:Button ID="btnAdd" runat="server" CssClass="btn btn-primary btn-lg" Text="Add" OnClick="btnAdd_Click" />
                     

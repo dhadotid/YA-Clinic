@@ -13,6 +13,15 @@ namespace YA_Clinic.form {
     public partial class AddSpecialist {
         
         /// <summary>
+        /// tulisanatas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tulisanatas;
+        
+        /// <summary>
         /// txtIdSpecialist control.
         /// </summary>
         /// <remarks>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,16 +13,53 @@ namespace YA_Clinic.form
 {
     public partial class AddSpecialist : System.Web.UI.Page
     {
+        string idnya;
+        DataTable dt = new DataTable();
         SpecialistController controller = new SpecialistController();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                txtIdSpecialist.Text = controller.AutoGenerateID();
-            }
             if (!isLogin())
             {
                 Response.Redirect("~/ui/Login.aspx");
+            }
+            if (!Page.IsPostBack)
+            {
+                cekAdd();
+            }
+        }
+
+        private void cekAdd()
+        {
+            idnya = Request.QueryString["ID"];
+            double fare;
+            if (Request.QueryString["Status"] == "Update")
+            {
+                if (Session["access"].ToString().Equals("0"))
+                {
+                    Response.Redirect("~/ui/Dashboard.aspx");
+                }
+                if (idnya != "")
+                {
+                    dt = controller.getDetailSpecilaist(idnya);
+                    txtIdSpecialist.Text = dt.Rows[0][0].ToString();
+                    txtSpecialist.Text = dt.Rows[0][1].ToString();
+                    fare = Convert.ToDouble(dt.Rows[0][2].ToString());
+                    txtFare.Text = Convert.ToInt32(fare).ToString();
+                    tulisanatas.InnerText = "Update Data Specialist";
+                    btnSave.Text = "Update";
+                    btnSave.CommandName = "Update";
+                }
+            }
+            else if (Request.QueryString["Status"] == "Add")
+            {
+                txtIdSpecialist.Text = controller.AutoGenerateID();
+                btnSave.Text = "Save";
+                btnSave.CommandName = "Save";
+                txtSpecialist.Focus();
+            }
+            else
+            {
+                Response.Redirect("~/ui/Specialist.aspx");
             }
         }
 
@@ -45,20 +83,32 @@ namespace YA_Clinic.form
         {
             string specialist = txtSpecialist.Text;
             int fare = Convert.ToInt32(txtFare.Text.Trim());
-
+            
             if (valid())
             {
-                if (!controller.specialistAvailable(specialist))
+                if(btnSave.CommandName == "Save")
                 {
-                    controller.Save(specialist, fare);
+                    if (!controller.specialistAvailable(specialist))
+                    {
+                        controller.Save(specialist, fare);
 
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
 
-                    Response.Redirect("~/ui/Specialist.aspx");
+                        Response.Redirect("~/ui/Specialist.aspx");
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Failed. Specialist name already available')", true);
+                    }
                 }
-                else
+                else if (btnSave.CommandName == "Update")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Failed. Specialist name already available')", true);
+                    if (controller.Update(Request.QueryString["ID"].ToString(), specialist, fare))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Update Successfully')", true);
+
+                        Response.Redirect("~/ui/Specialist.aspx");
+                    }
                 }
             }
         }

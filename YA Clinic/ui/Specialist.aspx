@@ -21,7 +21,7 @@
               <div class="container-fluid">
                 <div class="row" style="margin-right:5px;">
 
-    <asp:GridView ID="gv_Specialist" DataKeyNames="Id_Specialist" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" OnRowDeleting="gv_Specialist_RowDeleting" AllowPaging="True" PageSize="5" OnPageIndexChanging="gv_Specialist_PageIndexChanging">
+    <asp:GridView ID="gv_Specialist" DataKeyNames="Id_Specialist" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" OnRowDeleting="gv_Specialist_RowDeleting" AllowPaging="True" PageSize="5" OnPageIndexChanging="gv_Specialist_PageIndexChanging" OnRowCommand="gv_Specialist_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="ID Specialist">
                 <ItemTemplate>

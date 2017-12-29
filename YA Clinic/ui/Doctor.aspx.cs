@@ -20,7 +20,7 @@ namespace YA_Clinic.form
                 doctorData();
             }
             if (!isLogin())
-            {
+            {   
                 Response.Redirect("~/ui/Login.aspx");
             }
         }
@@ -79,6 +79,23 @@ namespace YA_Clinic.form
             else
             {
                 doctorData();
+            }
+        }
+
+        protected void btnAddnNew_Click(object sender, EventArgs e)
+        {
+            string status = "Add";
+            Response.Redirect("~/ui/AddDoctor.aspx?Status=" + status);
+        }
+
+        protected void dgv_Doctor_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string status = "Update";
+            if (e.CommandName == "Update")
+            {
+                GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+                string idDoctor = dgv_Doctor.DataKeys[row.RowIndex].Value.ToString();
+                Response.Redirect("~/ui/AddDoctor.aspx?Status=" + status + "&ID=" + idDoctor);
             }
         }
     }

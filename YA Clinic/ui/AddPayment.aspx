@@ -66,7 +66,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtMoney">Money</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtMoney" runat="server" placeholder="Money" CssClass="form-control" OnTextChanged="txtMoney_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtMoney" runat="server" placeholder="Money" CssClass="form-control" OnTextChanged="txtMoney_TextChanged" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
                   </div>
                 </div>
 

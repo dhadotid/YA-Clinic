@@ -12,6 +12,7 @@ namespace YA_Clinic.Controller
         SqlCommand sqlCom;
         SqlConnection sqlCon;
         SqlDataAdapter sqlDa;
+        DataTable dt = new DataTable();
         DataSet ds = new DataSet();
         Connection con = new Connection();
         public bool specialistAvailable(string specialist)
@@ -36,6 +37,19 @@ namespace YA_Clinic.Controller
             sqlCon.Close();
             return true;
         }
+
+        public DataTable getDetailSpecilaist(string idSpecialist)
+        {
+            sqlCon = con.openConnection();
+            sqlCom = new SqlCommand("select * from Doctor.Specialist where Id_Specialist like '" + idSpecialist + "'", sqlCon);
+            sqlDa = new SqlDataAdapter(sqlCom);
+            sqlDa.Fill(dt);
+            sqlCon.Open();
+            int i = sqlCom.ExecuteNonQuery();
+            sqlCon.Close();
+            return dt;
+        }
+
         public void Save(string Specialist, int Fare)
         {
             SqlConnection sqlcon = con.openConnection();
@@ -157,6 +171,29 @@ namespace YA_Clinic.Controller
                 }
             }
             return false;
+        }
+
+        public bool Update(string idSpecialist, string specialist, int fare)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "exec pcduptSpecialist @idspecilist, @specialist, @fare";
+                //string query = "update Patient.Patient set Patient_Name = @name, DateOfBirth = @dob, Address = @address, GenderPatient = @gender where Id_Patient = @idpatient";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlCom.Parameters.AddWithValue("@idspecilist", idSpecialist);
+                sqlCom.Parameters.AddWithValue("@specialist", specialist);
+                sqlCom.Parameters.AddWithValue("@fare", fare);
+                if (sqlCom.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
                       <asp:TextBox ID="txtSearch" runat="server" placeholder="Search .." CssClass="form-control" AutoPostBack="True" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
-                  <asp:Button CssClass="btn btn-info" style="float: right; margin-right: 20px; margin-bottom: 10px;" ID="btnAddnNew" runat="server" Text="Add New Data Doctor" />
+                  <asp:Button CssClass="btn btn-info" style="float: right; margin-right: 20px; margin-bottom: 10px;" ID="btnAddnNew" runat="server" Text="Add New Data Doctor" OnClick="btnAddnNew_Click" />
                     <!--<a href="#" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;" id="btnaddnewdata" runat="server">Add New Data Doctor</a>-->
               </fieldset>
               <br />
@@ -22,7 +22,7 @@
               <div class="container-fluid">
                 <div class="row" style="margin-right:5px;">
                   
-                    <asp:GridView ID="dgv_Doctor" DataKeyNames="Id_Doctor" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Doctor_PageIndexChanging" OnRowDeleting="dgv_Doctor_RowDeleting">
+                    <asp:GridView ID="dgv_Doctor" DataKeyNames="Id_Doctor" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Doctor_PageIndexChanging" OnRowDeleting="dgv_Doctor_RowDeleting" OnRowCommand="dgv_Doctor_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="Id Doctor">
                 <ItemTemplate>

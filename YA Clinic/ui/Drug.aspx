@@ -21,7 +21,7 @@
               <div class="container-fluid">
                 <div class="row" style="margin-right:5px;">
                   
-                    <asp:GridView ID="dgv_Drug" DataKeyNames="Id_Drug" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Drug_PageIndexChanging">
+                    <asp:GridView ID="dgv_Drug" DataKeyNames="Id_Drug" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnPageIndexChanging="dgv_Drug_PageIndexChanging" OnRowDeleting="dgv_Drug_RowDeleting" OnRowCommand="dgv_Drug_RowCommand">
         <Columns>
             <asp:TemplateField HeaderText="Id Drug">
                 <ItemTemplate>
@@ -51,6 +51,12 @@
             <asp:TemplateField HeaderText="Price">
                 <ItemTemplate>
                     <asp:Label ID="lblPrice" runat="server" Text='<%#Eval("Price", "{0:C2}") %>'/>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="">
+                <ItemTemplate>
+                    <asp:Button ID="btnUpdate" CssClass="btn btn-info" runat="server" CommandName="Update"  Text="Update"  />
+                    <asp:Button ID="btnDelete" CssClass="btn btn-info" runat="server" CommandName="Delete"  Text="Delete" OnClientClick="return confirm('Are you sure you want to delete this Drug data?');" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

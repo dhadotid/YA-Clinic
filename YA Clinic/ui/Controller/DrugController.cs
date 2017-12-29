@@ -13,6 +13,7 @@ namespace YA_Clinic.ui.Controller
         SqlConnection sqlCon;
         SqlDataAdapter sqlDa;
         DataSet ds = new DataSet();
+        DataTable dt = new DataTable();
         Connection con = new Connection();
 
         public string AutoGenerateID()
@@ -129,6 +130,87 @@ namespace YA_Clinic.ui.Controller
 
                 }
                 sqlCom.Clone();
+            }
+        }
+
+        public bool Update(string idDrug, string drugName, string drugType, string stock, string expDate, string price)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "exec pcduptDrug @Id_Drug, @DrugName, @DrugType, @Stock, @ExpDate, @Price";
+                //string query = "update Patient.Patient set Patient_Name = @name, DateOfBirth = @dob, Address = @address, GenderPatient = @gender where Id_Patient = @idpatient";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlCom.Parameters.AddWithValue("@Id_Drug", idDrug);
+                sqlCom.Parameters.AddWithValue("@DrugName", drugName);
+                sqlCom.Parameters.AddWithValue("@DrugType", drugType);
+                sqlCom.Parameters.AddWithValue("@Stock", stock);
+                sqlCom.Parameters.AddWithValue("@ExpDate", Convert.ToDateTime(expDate).ToString("yyyy-MM-dd"));
+                sqlCom.Parameters.AddWithValue("@Price", price);
+                if (sqlCom.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public DataTable getDetailDrug(string idDrug)
+        {
+            sqlCon = con.openConnection();
+            sqlCom = new SqlCommand("select * from Recipe.Drug where Id_Drug like '" + idDrug + "'", sqlCon);
+            sqlDa = new SqlDataAdapter(sqlCom);
+            sqlDa.Fill(dt);
+            sqlCon.Open();
+            int i = sqlCom.ExecuteNonQuery();
+            sqlCon.Close();
+            return dt;
+        }
+
+        public bool deleteData(string idDrug)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                sqlCom = new SqlCommand("delete from Recipe.Drug where Id_Drug = '" + idDrug + "'", sqlCon);
+                int result = sqlCom.ExecuteNonQuery();
+                sqlCon.Close();
+                if (result == 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool Update(string iddrug, string drugname, string drugtype, int stock, string exp, int price)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "exec pcduptDrug @iddrug, @drugname, @drugtype, @stock, @exp, @price";
+                //string query = "update Patient.Patient set Patient_Name = @name, DateOfBirth = @dob, Address = @address, GenderPatient = @gender where Id_Patient = @idpatient";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlCom.Parameters.AddWithValue("@iddrug", iddrug);
+                sqlCom.Parameters.AddWithValue("@drugname", drugname);
+                sqlCom.Parameters.AddWithValue("@drugtype", drugtype);
+                sqlCom.Parameters.AddWithValue("@stock", stock);
+                sqlCom.Parameters.AddWithValue("@exp", Convert.ToDateTime(exp).ToString("yyyy-MM-dd"));
+                sqlCom.Parameters.AddWithValue("@price", price);
+                if (sqlCom.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

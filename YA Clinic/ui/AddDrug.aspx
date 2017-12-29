@@ -9,7 +9,7 @@
                 <br>
 
                 <center>
-                <h2 id="tulisanatas">Add New Data Drug</h2>
+                <h2 id="tulisanatas" runat="server">Add New Data Drug</h2>
                 </center>
                 <hr>
 
@@ -52,7 +52,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtExpDate">ExpDate</label>
                   <div class="col-md-9">
-                    <asp:TextBox ID="txtExpDate" runat="server" placeholder="Please insert with format yyyy-MM-dd" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtExpDate" runat="server" placeholder="Please insert with format dd-MM-yyyy" CssClass="form-control"></asp:TextBox>
                   </div>
                 </div>
                 
