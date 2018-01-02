@@ -42,7 +42,7 @@ namespace YA_Clinic.ui.Controller
             using (sqlCon)
             {
                 sqlCon.Open();
-                string query = "select c.Id_Payment,a.Patient_Name, x.DoctorName ,b.Diagnose,b.DateTreatment,c.PaymentDoctor,c.PaymentDrug,c.TotalPayment from Patient.Patient a join Patient.Treatment b on a.Id_Patient = b.Id_Patient join Patient.Payment c on c.Id_Treatment = b.Id_Treatment join Doctor.Doctor x on b.Id_Doctor = x.Id_Doctor where c.isPay like '1' and c.Id_Payment like '%" + search + "%' or a.Patient_Name like '%" + search + "%' or x.DoctorName like '%" + search + "%' or b.Diagnose like '%" + search + "%' or b.DateTreatment like '%" + search + "%' or c.PaymentDoctor like '%" + search + "%' or c.PaymentDrug like '%" + search + "%' or c.TotalPayment like '%" + search + "%'";
+                string query = "select c.Id_Payment,a.Patient_Name, x.DoctorName ,b.Diagnose,b.DateTreatment,c.PaymentDoctor,c.PaymentDrug,c.TotalPayment from Patient.Patient a join Patient.Treatment b on a.Id_Patient = b.Id_Patient join Patient.Payment c on c.Id_Treatment = b.Id_Treatment join Doctor.Doctor x on b.Id_Doctor = x.Id_Doctor where c.isPay like '1' and (c.Id_Payment like '%" + search + "%' or a.Patient_Name like '%" + search + "%' or x.DoctorName like '%" + search + "%' or b.Diagnose like '%" + search + "%' or b.DateTreatment like '%" + search + "%' or c.PaymentDoctor like '%" + search + "%' or c.PaymentDrug like '%" + search + "%' or c.TotalPayment like '%" + search + "%')";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(ds);
@@ -83,7 +83,7 @@ namespace YA_Clinic.ui.Controller
             using (sqlCon)
             {
                 sqlCon.Open();
-                string query = "select x.Id_Payment, b.Patient_Name, a.Diagnose, x.PaymentDoctor, x.PaymentDrug, x.TotalPayment from Patient.Treatment a join Patient.Patient b on a.Id_Patient = b.Id_Patient join Patient.Payment x on a.Id_Treatment = x.Id_Treatment where x.isPay = '0' and x.Id_Payment like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or a.Diagnose like '%" + search + "%' or x.PaymentDoctor like '%" + search + "%' or x.PaymentDrug like '%" + search + "%' or x.TotalPayment like '%" + search + "%'";
+                string query = "select x.Id_Payment, b.Patient_Name, a.Diagnose, x.PaymentDoctor, x.PaymentDrug, x.TotalPayment from Patient.Treatment a join Patient.Patient b on a.Id_Patient = b.Id_Patient join Patient.Payment x on a.Id_Treatment = x.Id_Treatment where x.isPay = '0' and (x.Id_Payment like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or a.Diagnose like '%" + search + "%' or x.PaymentDoctor like '%" + search + "%' or x.PaymentDrug like '%" + search + "%' or x.TotalPayment like '%" + search + "%')";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(ds);

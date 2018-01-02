@@ -47,11 +47,11 @@ namespace YA_Clinic
                     txtname.Text = dt.Rows[0][1].ToString();
                     txtdob.Text = Convert.ToDateTime(dt.Rows[0][2]).ToString("dd/MM/yyyy");
                     txtaddress.Text = dt.Rows[0][3].ToString();
-                    if (dt.Rows[0][4].ToString() == "Male")
+                    if (dt.Rows[0][4].ToString().Trim() == "Male")
                     {
                         RadioMale.Checked = true;
                     }
-                    else if (dt.Rows[0][4].ToString() == "Female")
+                    else if (dt.Rows[0][4].ToString().Trim() == "Female")
                     {
                         RadioFemale.Checked = true;
                     }

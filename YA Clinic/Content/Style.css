@@ -114,6 +114,14 @@ header {
     max-width:380px;
 }
 
+.max-td {
+    float: right;
+}
+
+.min-textbox {
+    min-width: 320px;   /* depends how much minimum width you require */
+}
+
 .pagination-dha {
     /*display: inline-block;*/
     padding-left: 0;

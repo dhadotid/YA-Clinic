@@ -19,7 +19,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="txtIdRecipeDetail">Id RecipeDetail</label>
                   <div class="col-md-9">
-                      <asp:TextBox ID="txtIdRecipeDetail" runat="server" placeholder="Id RecipeDetail" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtIdRecipeDetail" runat="server" placeholder="Id RecipeDetail" CssClass="form-control min-textbox"></asp:TextBox>
                   </div>
                 </div>
                     </fieldset>
@@ -72,12 +72,16 @@
                   </div>
                 </div>
                         </td>
-                        <td>&nbsp;&nbsp;&nbsp;
-                            <asp:Label ID="lblDataRecipe" runat="server" Text="Data Recipe Drug" style="font-weight: 700"></asp:Label>
+
+                        <!-- ini nih-->
+                        <td></td>
+                        
+                        <td>
+                            <asp:Label ID="lblDataRecipe" runat="server" Text="Data Recipe Drug" style="font-weight: 700;"></asp:Label>
                                     <br />
                                     <asp:TextBox ID="txtSearchDrugRecipe" runat="server" CssClass="form-control my-narrow-input" placeholder="Search Data Recipe Drug" Width="472px" AutoPostBack="True" OnTextChanged="txtSearchDrugRecipe_TextChanged"></asp:TextBox>
                                     <br />
-                                <asp:GridView ID="gv_RecipeDrug" DataKeyNames="Id_RecipeDetail" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid max-grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="5" OnRowDeleting="gv_RecipeDrug_RowDeleting" OnPageIndexChanging="gv_RecipeDrug_PageIndexChanging">
+                                <asp:GridView ID="gv_RecipeDrug" style="float: right;" DataKeyNames="Id_RecipeDetail" runat="server" AutoGenerateColumns="false" HeaderStyle-Font-Bold="true" CssClass="table table-hover table-striped grid max-grid" UseAccessibleHeader="true" GridLines="None" CellSpacing="-1" AllowPaging="True" PageSize="2" OnRowDeleting="gv_RecipeDrug_RowDeleting" OnPageIndexChanging="gv_RecipeDrug_PageIndexChanging">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Id RecipeDetail">
                                             <ItemTemplate>

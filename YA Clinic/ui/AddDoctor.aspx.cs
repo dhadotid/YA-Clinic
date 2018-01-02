@@ -61,7 +61,7 @@ namespace YA_Clinic.ui
                     string specialist = dt.Rows[0][1].ToString().Trim() + " - " + dt.Rows[0][2].ToString().Trim();
                     DDIdSpecialist.Items.FindByText(specialist).Selected = true;
                     txtDoctorname.Text = dt.Rows[0][3].ToString();
-                    string gender = dt.Rows[0][4].ToString();
+                    string gender = dt.Rows[0][4].ToString().Trim();
                     if(gender == "Male")
                     {
                         RadioMale.Checked = true;

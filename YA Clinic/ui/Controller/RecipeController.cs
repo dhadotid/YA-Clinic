@@ -84,7 +84,7 @@ namespace YA_Clinic.ui.Controller
             using (sqlCon)
             {
                 sqlCon.Open();
-                string query = "select a.Id_Recipe, b.Patient_Name, c.Diagnose from Patient.Treatment c join Patient.Patient b on c.Id_Patient = b.Id_Patient join Recipe.Recipe a on c.Id_Recipe = a.Id_Recipe join Patient.Payment x on c.Id_Treatment = x.Id_Treatment where x.isPay = 0 and a.Id_Recipe like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or c.Diagnose like '%" + search + "%'";
+                string query = "select a.Id_Recipe, b.Patient_Name, c.Diagnose from Patient.Treatment c join Patient.Patient b on c.Id_Patient = b.Id_Patient join Recipe.Recipe a on c.Id_Recipe = a.Id_Recipe join Patient.Payment x on c.Id_Treatment = x.Id_Treatment where x.isPay = 0 and (a.Id_Recipe like '%" + search + "%' or b.Patient_Name like '%" + search + "%' or c.Diagnose like '%" + search + "%')";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);
                 sqlDa.Fill(ds);
@@ -179,7 +179,7 @@ namespace YA_Clinic.ui.Controller
             using (sqlCon)
             {
                 sqlCon.Open();
-                string query = "select a.Id_RecipeDetail, a.Id_Recipe, b.DrugName, a.Qty, a.Dose, a.Subtotal from Recipe.RecipeDetail a join Recipe.Drug b on a.Id_Drug = b.Id_Drug where a.Id_Recipe = '" + idrecipe + "' and a.isDraft = '0' and a.Id_RecipeDetail like '%" + search + "%' or a.Id_Recipe like '%" + search + "%' or b.DrugName like '%" + search + "%' or a.Qty like '%" + search + "%' or a.Dose like '%" + search + "%' or a.Subtotal like '%" + search + "%'";
+                string query = "select a.Id_RecipeDetail, a.Id_Recipe, b.DrugName, a.Qty, a.Dose, a.Subtotal from Recipe.RecipeDetail a join Recipe.Drug b on a.Id_Drug = b.Id_Drug where a.Id_Recipe = '" + idrecipe + "' and a.isDraft = '0' and (a.Id_RecipeDetail like '%" + search + "%' or b.DrugName like '%" + search + "%' or a.Qty like '%" + search + "%' or a.Dose like '%" + search + "%' or a.Subtotal like '%" + search + "%')";
                 //string query = "select * from Recipe.RecipeDetail where Id_Recipe = '" + idrecipe + "' and isDraft = '0'";
                 sqlCom = new SqlCommand(query, sqlCon);
                 sqlDa = new SqlDataAdapter(sqlCom);

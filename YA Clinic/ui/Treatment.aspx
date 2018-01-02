@@ -15,6 +15,7 @@
                   </div>
                     <asp:Button ID="btnSearch" runat="server" CssClass="btn btn-info" Text="Search" />
                   <br />
+                  <br />
                   <asp:Button CssClass="btn btn-info" style="float: right; margin-right: 20px; margin-bottom: 10px;" ID="btnAddnNew" runat="server" Text="Add New Data Treatment" OnClick="btnAddnNew_Click" />
                     <!--<a href="AddTreatment.aspx" class="btn btn-info" role="button" style="float: right; margin-right: 20px; margin-bottom: 10px;" runat="server" id="btnAddNew">Add New Data Treatment</a>-->
               </fieldset>
