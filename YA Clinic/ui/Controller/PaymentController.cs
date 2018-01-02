@@ -139,5 +139,25 @@ namespace YA_Clinic.ui.Controller
                 sqlCon.Close();
             }
         }
+
+        public DataSet getPaymentDetail(string idrecipe)
+        {
+            sqlCon = con.openConnection();
+            using (sqlCon)
+            {
+                sqlCon.Open();
+                string query = "select a.DrugName, b.Qty, b.Subtotal from Recipe.RecipeDetail b join Recipe.Drug a on b.Id_Drug = a.Id_Drug where b.Id_Recipe = '" + idrecipe + "'";
+                sqlCom = new SqlCommand(query, sqlCon);
+                sqlDa = new SqlDataAdapter(sqlCom);
+                sqlDa.Fill(ds);
+                int count = ds.Tables[0].Rows.Count;
+                sqlCon.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    return ds;
+                }
+                return ds;
+            }
+        }
     }
 }

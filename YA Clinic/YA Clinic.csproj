@@ -208,9 +208,11 @@
     <Content Include="Content\img\backgrounds\3%402x.jpg" />
     <Content Include="Content\img\backgrounds\3.jpg" />
     <Content Include="Content\style2.css" />
+    <Content Include="Content\StyleKwitansi.css" />
     <Content Include="dashboard\css\style.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="image\clinic.png" />
     <Content Include="Scripts\jquery.backstretch.js" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -240,6 +242,7 @@
     <Content Include="ui\Patient.aspx" />
     <Content Include="ui\PatientDetail.aspx" />
     <Content Include="ui\Payment.aspx" />
+    <Content Include="ui\PaymentDetail.aspx" />
     <Content Include="ui\Recipe.aspx" />
     <Content Include="ui\Specialist.aspx" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -540,6 +543,13 @@
     </Compile>
     <Compile Include="ui\Payment.aspx.designer.cs">
       <DependentUpon>Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ui\PaymentDetail.aspx.cs">
+      <DependentUpon>PaymentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ui\PaymentDetail.aspx.designer.cs">
+      <DependentUpon>PaymentDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="ui\Recipe.aspx.cs">
       <DependentUpon>Recipe.aspx</DependentUpon>

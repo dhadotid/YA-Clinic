@@ -55,6 +55,8 @@ namespace YA_Clinic.ui
                 {
                     controller.updatePayment(txtIdPayment.Text, txtIdRecipe.Text);
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record saved Successfully')", true);
+
+                    Response.Redirect("~/ui/PaymentDetail.aspx?IdPayment=" + txtIdPayment.Text + "&PatientName=" + txtPatientName.Text + "&DoctorName=" + txtDoctorName.Text + "&PaymentDrug=" + txtPaymentDrug.Text + "&PaymentDoctor=" + txtPaymentDoctor.Text + "&Total=" + txtTotalPayment.Text + "&Money=" + txtMoney.Text +"&Change=" + txtChange.Text + "&IdRecipe=" + txtIdRecipe.Text);
                 }
             }
             loadTablePayment();
